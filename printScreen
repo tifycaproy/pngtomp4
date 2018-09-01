@@ -1,0 +1,10 @@
+# /etc/cron.d/printScreen:
+
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+*/1 * * * * root /home/cpalacios/Freelancer/lambda/scrot.sh
+#*/1 * * * * root sleep 10 && /home/cpalacios/Freelancer/lambda/scrot.sh
+#*/1 * * * * root sleep 20 && /home/cpalacios/Freelancer/lambda/scrot.sh
+#*/1 * * * * root sleep 30 && /home/cpalacios/Freelancer/lambda/scrot.sh
+#*/1 * * * * root sleep 40 && /home/cpalacios/Freelancer/lambda/scrot.sh
+#*/1 * * * * root sleep 50 && /home/cpalacios/Freelancer/lambda/scrot.sh
