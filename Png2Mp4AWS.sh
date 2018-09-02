@@ -3,7 +3,7 @@
 #######################
 # Var:
 #######################
-LOCATIONS=~/screenCap
+LOCIMG=/opt/screen
 BASEIMG=ps
 SCROT=/usr/bin/scrot
 # Quality image 1-100
@@ -14,7 +14,10 @@ DATE='date +%s'
 #echo $LOCATIONS
 case "$1" in
         capture)
-		DISPLAY=:0 $SCROT $LOCATIONS/$BASEIMG'%s.jpg' -q $Q_IMG
+		if [ ! -d $LOVIMG ];then
+			mkdir -p $LOCIMG
+		fi
+		DISPLAY=:0 $SCROT $LOCIMG/$BASEIMG'%s.jpg' -q $Q_IMG
                 ;;
         confCron)
 		if [ ! -d "$LOCATIONS" ]; then
@@ -22,13 +25,12 @@ case "$1" in
                 fi
 		echo "SHELL=/bin/bash" > /etc/cron.d/$CRONF
 		echo "PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin" >> /etc/cron.d/$CRONF		
-		echo "*/1 * * * * root $LOCATIONS/Png2Mp4AWS.sh capture" >> /etc/cron.d/$CRONF
-		echo "*/1 * * * * root sleep 10 && $LOCATIONS/Png2Mp4AWS.sh capture" >> /etc/cron.d/$CRONF
-		echo "*/1 * * * * root sleep 20 && $LOCATIONS/Png2Mp4AWS.sh capture" >> /etc/cron.d/$CRONF
-		echo "*/1 * * * * root sleep 30 && $LOCATIONS/Png2Mp4AWS.sh capture" >> /etc/cron.d/$CRONF
-		echo "*/1 * * * * root sleep 40 && $LOCATIONS/Png2Mp4AWS.sh capture" >> /etc/cron.d/$CRONF
-		echo "*/1 * * * * root sleep 50 && $LOCATIONS/Png2Mp4AWS.sh capture" >> /etc/cron.d/$CRONF
- 		echo "$LOCATIONS/Png2Mp4AWS.sh rmCron" > ~/.bash_logout
+		echo "*/1 * * * * root Png2Mp4AWS.sh capture" >> /etc/cron.d/$CRONF
+		echo "*/1 * * * * root sleep 10 && Png2Mp4AWS.sh capture" >> /etc/cron.d/$CRONF
+		echo "*/1 * * * * root sleep 20 && Png2Mp4AWS.sh capture" >> /etc/cron.d/$CRONF
+		echo "*/1 * * * * root sleep 30 && Png2Mp4AWS.sh capture" >> /etc/cron.d/$CRONF
+		echo "*/1 * * * * root sleep 40 && Png2Mp4AWS.sh capture" >> /etc/cron.d/$CRONF
+		echo "*/1 * * * * root sleep 50 && Png2Mp4AWS.sh capture" >> /etc/cron.d/$CRONF
                 ;;
 	rmCron)
 		$RM /etc/cron.d/$CRONF

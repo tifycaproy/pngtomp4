@@ -1,27 +1,46 @@
 #!/bin/bash
 #Definicion de Variables
-PWD=$(pwd)
+# instalacion de paquetes:
+# aptitude install aws-cli scrot
+# yum install aws-cli scrot
 
-#0.- Validacion de existencia de binarios
-#0.5.- Ubicar binario
-cp Png2Mp4AWS.sh /bin/.
+#0.- Ubicar binario
+cp -f Png2Mp4AWS.sh /bin/.
 chmod /bin/Png2Mp4AWS.sh
 ##################################
 #1.- Configurar GDM3
 # Conf PreSession
-cp PoLDefault /etc/gdm3/PostLogin/Default
+cp -f PoLDefault /etc/gdm3/PostLogin/Default
 chmod +x /etc/gdm3/PostLogin/Default
 
 # Conf PostLogin
-cp PoSDefault /etc/gdm3/PostSession/Default
+cp -f PoSDefault /etc/gdm3/PostSession/Default
 chmod +x /etc/gdm3/PostSession/Default
 
 # Conf PostSession
-cp PrSDefault /etc/gdm3/PreSession/Default
+cp -f PrSDefault /etc/gdm3/PreSession/Default
 chmod +x /etc/gdm3/PreSession/Default
 
 ###############################
-#2.- Configurar Variables de Entorno (Usuarios AWS, PAth de trabajo)
+#2.- Configurar Variables de Entorno (Usuarios AWS, Path de trabajo)
+echo "Indique usuario del S3: "
+read US3
+echo "Indique el Password del User S3: "
+read PS3
+echo "describir el bucket S3: "
+read bucket
+
+if [ $US3 && $PS3 && $bucket ] ; then
+	echo "export US3=$US3" > /etc/profile.d/screen.sh
+	echo "export PS3=$PS3" >> /etc/profile.d/screen.sh
+	echo "export bucket=$bucket" >> /etc/profile.d/screen.sh
+	chmod +x /etc/profile.d/screen.sh
+	/etc/profile.d/screen.sh
+else
+	echo "Debe especificar Usuario y Password del S3"
+fi
+
+
 #3.- Crear Carpeta de imagenes
 #4.- Se copia el binario en la carpeta del PATH
 
