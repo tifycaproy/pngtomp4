@@ -1,0 +1,3 @@
+#!/bin/sh
+/bin/Png2Mp4AWS.sh rmCron
+exit 0
