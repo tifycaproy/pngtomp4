@@ -29,11 +29,14 @@ echo "Indique el Password del User S3: "
 read PS3
 echo "describir el bucket S3: "
 read bucket
+echo "Carpeta hook en el S3: "
+read dir
 
-if [ $US3 && $PS3 && $bucket ] ; then
+if [ $US3 && $PS3 && $bucket && $dir ] ; then
 	echo "export US3=$US3" > /etc/profile.d/screen.sh
 	echo "export PS3=$PS3" >> /etc/profile.d/screen.sh
 	echo "export bucket=$bucket" >> /etc/profile.d/screen.sh
+	echo "export dir=$dir" >> /etc/profile.d/screen.sh
 	chmod +x /etc/profile.d/screen.sh
 	/etc/profile.d/screen.sh
 else

@@ -37,11 +37,13 @@ case "$1" in
 		$0 sendS3
 		;;
 	sendS3)
-		echo "Se comprime"
-		cd $LOCATIONS
+		#echo "Se comprime"
+		cd $LOCIMG
 		zip -r `$DATE`.zip *.jpg
-		echo "se sube al S3"
-		$RM *.jpg
+		#echo "se sube al S3"
+		aws s3 cp *.jpg s3://$bucket/
+		aws s3 cp iniciar s3://$bucket/$dir/iniciar
+		$RM *.jpg	
 		;;
         *)
                 echo "#################################################################"
